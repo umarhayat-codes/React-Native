@@ -1,11 +1,15 @@
-
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+require('dotenv').config()
 
 const Config = () => {
-    mongoose.connect('mongodb+srv://umarhayatcoder:vXtDrwIIh0BVfW0e@cluster0.5gks7.mongodb.net/',{dbName : "register"})
-    .then (res => {
-        console.log('Connected');
-    }) 
-}  
+    mongoose
+        .connect(process.env.MONGO_URI, { dbName: process.env.DB_NAME })
+        .then(() => {
+            console.log('Connected');
+        })
+        .catch((err) => {
+            console.error('Database connection error:', err);
+        });
+};
 
-module.exports = {Config}
+module.exports = { Config };
